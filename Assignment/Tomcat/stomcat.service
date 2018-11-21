@@ -1,0 +1,5 @@
+[Unit]
+Description=stomcat_on_port_9999
+
+[Service]
+ExecStart=/etc/init.d/stomcat start
