@@ -1,0 +1,14 @@
+<Context privileged="true" antiResourceLocking="false"
+         docBase="${catalina.home}/webapps/manager">
+    <Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="^.*$" />
+</Context>
+
+
+
+/* 
+
+This content should be deleted
+
+every webapp should have a contect file in conf/Catalina/{hostname}/{webapp_name}.xml
+
+in this case we are accessing manager.xml so we creatd a manager.xml file in localhost providing ablove priviledges */
