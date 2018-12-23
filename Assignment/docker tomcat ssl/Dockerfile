@@ -11,7 +11,6 @@ ADD server.xml /usr/local/tomcat/conf/server.xml
 ADD context.xml /usr/local/tomcat/webapps/manager/META-INF/context.xml
 ADD keystore.jks /root/keystore.jks
 
-EXPOSE 8080
-EXPOSE 8443
+EXPOSE 8080 8443
 
 CMD ["catalina.sh","run"]
