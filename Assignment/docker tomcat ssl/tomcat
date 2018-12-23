@@ -1,18 +1,13 @@
-[Unit]
-Description=stomcat_on_port_9999
-
-[Service]
-ExecStart=/etc/init.d/stomcat start
 
 start() {
   echo 'Starting service…' >&2
-  sh /root/tomcat/apache-tomcat-8.5.35/bin/startup.sh
+  sh /opt/apache-tomcat-8.5.37/bin/startup.sh
   echo 'Service started' >&2
 }
 
 
 stop() {
-  kill -15 $(pidof java)
+  sh /opt/apache-tomcat-8.5.37/bin/shutdown.sh
   echo 'Service stopped' >&2
 }
 
@@ -23,7 +18,7 @@ case "$1" in
   stop)
     stop
     ;;
-  retart)
+  restart)
     stop
     start
     ;;
