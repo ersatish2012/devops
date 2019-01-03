@@ -1,0 +1,59 @@
+---
+
+- name: Make Tomcat folder
+  file:
+    path: /opt/tomcat
+    state: directory
+    owner: satish
+    group: satish
+
+- name: Copy tomcat Installation
+  copy:
+    src: "files/{{package}}"
+    dest: /opt/tomcat
+    owner: satish
+    group: satish
+
+- name: Extracting files from tarball
+  unarchive:
+    src: "/opt/tomcat/{{package}}"
+    dest: /opt/tomcat/
+    owner: satish
+    group: satish
+    mode: 0755
+    remote_src: yes
+
+- name: Chown tomcat directory
+  shell: chown satish:satish /opt/tomcat/apache-tomcat-{{version}}
+
+- name: Copying templates
+  template:
+    src: context.xml.j2
+    dest: /opt/tomcat/apache-tomcat-{{version}}/webapps/manager/META-INF/context.xml
+    owner: satish
+    group: satish
+    mode: 0644
+
+- name: Copying templates
+  template:
+    src: server.xml.j2
+    dest: /opt/tomcat/apache-tomcat-{{version}}/conf/server.xml
+    owner: satish
+    group: satish
+    mode: 0644
+
+- name: Copying templates
+  template:
+    src: tomcat-users.xml.j2
+    dest: /opt/tomcat/apache-tomcat-{{version}}/conf/tomcat-users.xml
+    owner: satish
+    group: satish
+    mode: 0644
+
+- name: Adding tomcat service
+  copy:
+    src: "files/tomcat"
+    dest: /etc/init.d/tomcat
+
+- name: restarting Tomcat
+  shell: service tomcat restart
